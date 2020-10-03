@@ -1,0 +1,51 @@
+Screen: 
+    NavigationLayout:
+        ScreenManager:
+            Screen:                    
+                BoxLayout:
+                    orientation:'vertical'
+                    MDToolbar:
+                        title:"test"
+                        elevation:10
+                        left_action_items: [['menu', lambda x: nav_drawer.toggle_nav_drawer()]]
+                    Widget:
+                    ScreenManager:
+                        id: screen_manager
+                        CreateScreen:
+                        ManageScreen:   
+        MDNavigationDrawer:
+            id: nav_drawer
+            BoxLayout:
+                orientation:'vertical'
+                Image:
+                    source: "logo2.png"
+                ScrollView:
+                    MDList:
+                        MDRectangleFlatButton:
+                            text:'test'
+                            on_release: 
+                                screen_manager.current = "create"
+                                nav_drawer.set_state("close")
+                        OneLineListItem:
+                            text: "crée un utilisateur"
+                            on_release:
+                                screen_manager.current = "create"
+                                nav_drawer.set_state("close")
+                        OneLineListItem:
+                            text: "Géré les utilisateurs"
+                            on_release: 
+                                screen_manager.current = "manage"
+                                nav_drawer.set_state("close")
+        
+
+<CreateScreen>:
+    name:"create"
+    MDRectangleFlatButton:
+        text:'test'
+        on_press: root.manager.current = "manage"
+        
+<ManageScreen>:
+    name:"manage"
+    MDRectangleFlatButton:
+        text:'teste'
+        on_press: root.manager.current = "create"

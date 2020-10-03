@@ -1,0 +1,216 @@
+Screen: 
+    NavigationLayout:
+        ScreenManager:
+            Screen:                    
+                BoxLayout:
+                    orientation:'vertical'
+                    MDToolbar:
+                        title:"test"
+                        elevation:10
+                        left_action_items: [['menu', lambda x: nav_drawer.set_state("open")]]                 
+                    ScreenManager:
+                        id: screen_manager
+                        Home:
+                        CreateScreen:
+                        CreateStudent
+                        ManageStudents:
+                        ManageUsers:
+                        Student_Code:
+                        StudentProfile:
+                        UserProfile: 
+                    
+        MDNavigationDrawer:
+            id: nav_drawer
+            BoxLayout:
+                orientation:'vertical'
+                Image:
+                    source: "logo2.png"
+                ScrollView:
+                    MDList:
+                        OneLineListItem:
+                            text: "Utilisateurs"
+                            on_release:
+                                screen_manager.current = "manage_users"
+                                nav_drawer.set_state("close")
+                        OneLineListItem:
+                            text: "crée un utilisateur"
+                            on_release:
+                                screen_manager.current = "create"
+                                nav_drawer.set_state("close")
+                        OneLineListItem:
+                            text: "Etudiants"
+                            on_release: 
+                                screen_manager.current = "manage_students"
+                                nav_drawer.set_state("close")
+                        OneLineListItem:
+                            text: "creer Etudiants"
+                            on_release: 
+                                screen_manager.current = "create_stud"
+                                nav_drawer.set_state("close")
+        
+<Home>:
+    name:"home"
+
+
+<CreateScreen>:
+    name:"create"
+    MDGridLayout:
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        cols:2
+        adaptive_height: True
+        MDLabel:
+            text: "     Nom:"
+        MDTextField:
+            hint_text: "Nom"
+            id:nom
+        MDLabel:
+            text: "     Prénom:"
+        MDTextField:
+            hint_text: "Prénom"
+            id:prenom
+        MDLabel:
+            text: "     tel:"
+        MDTextField:
+            hint_text: "Téléphone"
+            id:tel
+        MDLabel:
+            text: "     nombre d'étudiants:"
+        MDTextField:
+            hint_text: "Nombre d'étudiants ajouté"
+            id:nbr
+        MDRectangleFlatButton:
+            text:"sumit"
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            on_press:
+                root.add_user()
+                app.help_str.ids.screen_manager.current = 'home'
+                
+
+<CreateStudent>:
+    name:"create_stud"
+    MDGridLayout:
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        cols:2
+        adaptive_height: True
+        MDLabel:
+            text: "     Nom:"
+        MDTextField:
+            hint_text: "Nom"
+            id:stud_nom
+        MDLabel:
+            text: "     Prénom:"
+        MDTextField:
+            hint_text: "Prénom"
+            id:stud_prenom
+        MDLabel:
+            text: "     tel:"
+        MDTextField:
+            hint_text: "Téléphone"
+            id:stud_tel
+        MDRectangleFlatButton:
+            text:"sumit"
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            on_press:
+                root.add_student()
+                app.help_str.ids.screen_manager.current = 'home'
+    
+        
+<ManageStudents>:
+    name:"manage_students"
+    BoxLayout:
+        orientation:'vertical'
+
+<Student_Code>:
+    name:"student_code"
+    BoxLayout:
+        orientation:'vertical'
+        MDGridLayout:
+            cols:3
+            adaptive_height: True
+            adaptive_with: True
+            MDRectangleFlatButton:
+                text:"Profil"
+                
+            MDLabel:
+                id: stud_code_title
+                size_hint:(0.2,0.2)
+                text:""
+                halign: 'center'
+            MDRectangleFlatButton:
+                text:"Ajouté"
+                on_press:
+                    screen_manager.current = 'create_stud'
+                
+        BoxLayout:
+            orientation:'vertical'
+            id: box_layout
+    
+
+<ManageUsers>:
+    name:"manage_users"
+    BoxLayout:
+        orientation:'vertical'
+
+<StudentProfile>:
+    name:"student_profile"
+    MDGridLayout:
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        cols:2
+        adaptive_height: True
+        MDLabel:
+            text: "     Nom:"
+        MDLabel:
+            text: ""
+            id:profil_s_nom
+        MDLabel:
+            text: "     Prénom:"
+        MDLabel:
+            text: ""
+            id:profil_s_prenom
+        MDLabel:
+            text: "     Tel:"
+        MDLabel:
+            text: ""
+            id:profil_s_tel
+        MDLabel:
+            text: "     Code:"
+        MDLabel:
+            text: ""
+            id:profil_s_code
+        MDLabel:
+            text: "     Parains:"
+        MDLabel:
+            text: ""
+            id:profil_s_par
+
+<UserProfile>:
+    name:"user_profile"
+    MDGridLayout:
+        pos_hint:{'center_x':0.5,'center_y':0.5}
+        cols:2
+        adaptive_height: True
+        MDLabel:
+            text: "     Nom:"
+        MDLabel:
+            text: ""
+            id:profil_u_nom
+        MDLabel:
+            text: "     Prénom:"
+        MDLabel:
+            text: ""
+            id:profil_u_prenom
+        MDLabel:
+            text: "     Tel:"
+        MDLabel:
+            text: ""
+            id:profil_u_tel
+        MDLabel:
+            text: "     Code:"
+        MDLabel:
+            text: ""
+            id:profil_u_code
+        MDLabel:
+            text: "     Nombre d'étudiants:"
+        MDLabel:
+            text: ""
+            id:profil_u_nbr
